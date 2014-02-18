@@ -60,4 +60,31 @@
     return output;
 }
 
++ (NSString *)camelCaseFromUnderscoredString:(NSString *)string
+{
+    if (!string) {
+        return nil;
+    }
+
+    NSMutableString *output = [NSMutableString stringWithCapacity:string.length];
+    BOOL makeNextCharacterUpperCase = NO;
+    for (NSInteger index = 0; index < [string length]; index += 1) {
+        NSString *character = [string substringWithRange:NSMakeRange(index, 1)];
+
+        if ([character isEqualToString:@"_"]) {
+            makeNextCharacterUpperCase = YES;
+            continue;
+        }
+
+        if (makeNextCharacterUpperCase) {
+            character = [character uppercaseString];
+            makeNextCharacterUpperCase = NO;
+        }
+
+        [output appendString:character];
+    }
+
+    return output;
+}
+
 @end

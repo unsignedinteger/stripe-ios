@@ -201,38 +201,10 @@ static NSString *const tokenEndpoint = @"tokens";
         if ([key isEqualToString:@"card"]) {
             camelCasedResponse[key] = [self camelCasedResponseFromStripeResponse:response[key]];
         } else {
-            camelCasedResponse[key] = response[key];
+            camelCasedResponse[[StripeUtil camelCaseFromUnderscoredString:key]] = response[key];
         }
     }
     return camelCasedResponse;
-}
-
-// Converts |string| from underscore_format to camelCase.
-+ (NSString *)camelCaseFromUnderscoredString:(NSString *)string
-{
-    if (!string || [string isEqualToString:@""]) {
-        return @"";
-    }
-
-    NSMutableString *output = [NSMutableString stringWithCapacity:string.length];
-    BOOL makeNextCharacterUpperCase = NO;
-    for (NSInteger index = 0; index < [string length]; index += 1) {
-        NSString *character = [string substringWithRange:NSMakeRange(index, 1)];
-
-        if ([character isEqualToString:@"_"]) {
-            makeNextCharacterUpperCase = YES;
-            continue;
-        }
-
-        if (makeNextCharacterUpperCase) {
-            character = [character uppercaseString];
-            makeNextCharacterUpperCase = NO;
-        }
-
-        [output appendString:character];
-    }
-
-    return output;
 }
 
 // Converts a Stripe API error into an |NSError|.
@@ -258,7 +230,7 @@ static NSString *const tokenEndpoint = @"tokens";
     // |param| specifies which parameter caused the error.
     NSString *parameter = json[@"error"][@"param"];
     if (parameter) {
-        userInfo[STPErrorParameterKey] = [self camelCaseFromUnderscoredString:parameter];
+        userInfo[STPErrorParameterKey] = [StripeUtil camelCaseFromUnderscoredString:parameter];
     }
 
     // Determine what type of error it is.

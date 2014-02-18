@@ -20,4 +20,7 @@
 // URL-encodes the given string.
 + (NSString *)URLEncodedString:(NSString *)string;
 
+// Converts |string| from underscore_format to camelCase.
++ (NSString *)camelCaseFromUnderscoredString:(NSString *)string;
+
 @end
