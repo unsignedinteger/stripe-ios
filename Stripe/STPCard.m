@@ -304,4 +304,22 @@
             [self validateExpMonth:&expMonthRef error:outError] &&
             (cvcRef == nil || [self validateCvc:&cvcRef error:outError]);
 }
+
+- (NSDictionary *)dictionaryRepresentation
+{
+    return @{
+            @"number" : self.number ?: [NSNull null],
+            @"exp_month" : self.expMonth ? [NSString stringWithFormat:@"%lu", (unsigned long) self.expMonth] : [NSNull null],
+            @"exp_year" : self.expYear ? [NSString stringWithFormat:@"%lu", (unsigned long) self.expYear] : [NSNull null],
+            @"cvc" : self.cvc ?: [NSNull null],
+            @"name" : self.name ?: [NSNull null],
+            @"address_line1" : self.addressLine1 ?: [NSNull null],
+            @"address_line2" : self.addressLine2 ?: [NSNull null],
+            @"address_city" : self.addressCountry ?: [NSNull null],
+            @"address_state" : self.addressState ?: [NSNull null],
+            @"address_zip" : self.addressZip ?: [NSNull null],
+            @"address_country" : self.addressCountry ?: [NSNull null]
+    };
+}
+
 @end

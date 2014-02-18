@@ -56,4 +56,7 @@
  one.
  */
 - (BOOL)validateCardReturningError:(NSError **)outError;
+
+- (NSDictionary *)dictionaryRepresentation;
+
 @end

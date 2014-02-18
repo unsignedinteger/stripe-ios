@@ -27,6 +27,9 @@
 		11E1F658165157F100B49816 /* STPCardTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EE8255164786A40039CDD4 /* STPCardTest.m */; };
 		11E1F659165157F100B49816 /* STPTokenTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D5AEF164DAD2D0053BB76 /* STPTokenTest.m */; };
 		11F5800E1656C0CC0036F21E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F5800D1656C0CC0036F21E /* Default-568h@2x.png */; };
+		4A3A0B7A18B3164700FD5434 /* StripeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3A0B7918B3164700FD5434 /* StripeUtil.m */; };
+		4A3A0B7B18B3164700FD5434 /* StripeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3A0B7918B3164700FD5434 /* StripeUtil.m */; };
+		4A3A0B7C18B3164700FD5434 /* StripeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3A0B7918B3164700FD5434 /* StripeUtil.m */; };
 		4AFE6F3318B29F7A006956CC /* STPaymentLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AFE6F3118B29F7A006956CC /* STPaymentLocalizable.strings */; };
 		4AFE6F3418B29F7A006956CC /* STPaymentLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AFE6F3118B29F7A006956CC /* STPaymentLocalizable.strings */; };
 		4CCA84E917146D130078A9DF /* PKAddressZip.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA84C217146D130078A9DF /* PKAddressZip.m */; };
@@ -195,6 +198,8 @@
 		11FBE9A21647725D00299E6F /* StripeError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripeError.h; sourceTree = "<group>"; };
 		11FBE9A31647725D00299E6F /* StripeError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripeError.m; sourceTree = "<group>"; };
 		11FBE9B51647744200299E6F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4A3A0B7818B3164700FD5434 /* StripeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StripeUtil.h; sourceTree = "<group>"; };
+		4A3A0B7918B3164700FD5434 /* StripeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StripeUtil.m; sourceTree = "<group>"; };
 		4AFE6F3218B29F7A006956CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/STPaymentLocalizable.strings; sourceTree = "<group>"; };
 		4CCA84C117146D130078A9DF /* PKAddressZip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKAddressZip.h; path = PaymentKit/PKAddressZip.h; sourceTree = "<group>"; };
 		4CCA84C217146D130078A9DF /* PKAddressZip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PKAddressZip.m; path = PaymentKit/PKAddressZip.m; sourceTree = "<group>"; };
@@ -334,6 +339,8 @@
 				11FBE9A31647725D00299E6F /* StripeError.m */,
 				11C74BA0164043050071C2CA /* Stripe.h */,
 				11C74BA1164043050071C2CA /* Stripe.m */,
+				4A3A0B7818B3164700FD5434 /* StripeUtil.h */,
+				4A3A0B7918B3164700FD5434 /* StripeUtil.m */,
 				11C74B9E164043050071C2CA /* Supporting Files */,
 				11EE825716478A440039CDD4 /* STPToken.h */,
 				11EE825816478A440039CDD4 /* STPToken.m */,
@@ -675,6 +682,7 @@
 				4CCA84EF17146D130078A9DF /* PKCardCVC.m in Sources */,
 				4CCA84F217146D130078A9DF /* PKCardExpiry.m in Sources */,
 				4CCA84F517146D130078A9DF /* PKCardNumber.m in Sources */,
+				4A3A0B7A18B3164700FD5434 /* StripeUtil.m in Sources */,
 				4CCA84F817146D130078A9DF /* PKTextField.m in Sources */,
 				4CCA84FB17146D130078A9DF /* PKUSAddressZip.m in Sources */,
 				4CCA84FE17146D130078A9DF /* PKView.m in Sources */,
@@ -692,6 +700,7 @@
 				FAFC12C316E575150066297F /* MBProgressHUD.m in Sources */,
 				FAFC12CC16E57E6D0066297F /* STPView.m in Sources */,
 				FAFC12CE16E57E960066297F /* STPCard.m in Sources */,
+				4A3A0B7B18B3164700FD5434 /* StripeUtil.m in Sources */,
 				FAFC12D016E57E9B0066297F /* StripeError.m in Sources */,
 				FAFC12D216E57E9F0066297F /* Stripe.m in Sources */,
 				FAFC12D416E57EA20066297F /* STPToken.m in Sources */,
@@ -723,6 +732,7 @@
 				4CCA84F117146D130078A9DF /* PKCardCVC.m in Sources */,
 				4CCA84F417146D130078A9DF /* PKCardExpiry.m in Sources */,
 				4CCA84F717146D130078A9DF /* PKCardNumber.m in Sources */,
+				4A3A0B7C18B3164700FD5434 /* StripeUtil.m in Sources */,
 				4CCA84FA17146D130078A9DF /* PKTextField.m in Sources */,
 				4CCA84FD17146D130078A9DF /* PKUSAddressZip.m in Sources */,
 				4CCA850017146D130078A9DF /* PKView.m in Sources */,
