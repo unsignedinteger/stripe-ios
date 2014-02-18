@@ -23,4 +23,7 @@
 // Converts |string| from underscore_format to camelCase.
 + (NSString *)camelCaseFromUnderscoredString:(NSString *)string;
 
+// Parses |data| into an |NSDictionary|; if it fails, writes an error (STPUnexpectedError) to |error|.
++ (NSDictionary *)dictionaryFromJSONData:(NSData *)data error:(NSError **)error;
+
 @end

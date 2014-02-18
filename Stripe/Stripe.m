@@ -152,7 +152,7 @@ static NSString *const tokenEndpoint = @"tokens";
 {
     if (requestError) {
         NSDictionary *json = nil;
-        if (body && (json = [self dictionaryFromJSONData:body error:nil]) && json[@"error"]) {
+        if (body && (json = [StripeUtil dictionaryFromJSONData:body error:nil]) && json[@"error"]) {
             completion(nil, [self errorFromStripeResponse:json]); // Handle Stripe API errors as |StripeDomain| errors.
         }
         else {
@@ -161,7 +161,7 @@ static NSString *const tokenEndpoint = @"tokens";
     }
     else {
         NSError *parseError;
-        NSDictionary *json = [self dictionaryFromJSONData:body error:&parseError];
+        NSDictionary *json = [StripeUtil dictionaryFromJSONData:body error:&parseError];
 
         if (!json) {
             completion(nil, parseError);
@@ -170,26 +170,6 @@ static NSString *const tokenEndpoint = @"tokens";
         } else {
             completion(nil, [self errorFromStripeResponse:json]);
         }
-    }
-}
-
-// Parses |data| into an |NSDictionary|; if it fails, writes an error to |error|.
-+ (NSDictionary *)dictionaryFromJSONData:(NSData *)data error:(NSError **)error
-{
-    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-
-    if (dictionary) {
-        return dictionary;
-    } else {
-        if (error) {
-            *error = [[NSError alloc] initWithDomain:StripeDomain
-                                                code:STPAPIError
-                                            userInfo:@{
-                                                    NSLocalizedDescriptionKey : STPUnexpectedError,
-                                                    STPErrorMessageKey : @"The response from Stripe failed to get parsed into valid JSON."
-                                            }];
-        }
-        return nil;
     }
 }
 

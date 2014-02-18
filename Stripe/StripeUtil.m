@@ -7,6 +7,7 @@
 //
 
 #import "StripeUtil.h"
+#import "StripeError.h"
 
 @implementation StripeUtil
 
@@ -85,6 +86,25 @@
     }
 
     return output;
+}
+
++ (NSDictionary *)dictionaryFromJSONData:(NSData *)data error:(NSError **)error
+{
+    NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+
+    if (dictionary) {
+        return dictionary;
+    } else {
+        if (error) {
+            *error = [[NSError alloc] initWithDomain:StripeDomain
+                                                code:STPAPIError
+                                            userInfo:@{
+                                                    NSLocalizedDescriptionKey : STPUnexpectedError,
+                                                    STPErrorMessageKey : @"The response from Stripe failed to get parsed into valid JSON."
+                                            }];
+        }
+        return nil;
+    }
 }
 
 @end
