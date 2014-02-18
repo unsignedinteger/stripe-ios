@@ -30,8 +30,6 @@
         }
     }
 
-    NSLog(@"POST Body: %@", [pairs componentsJoinedByString:@"&"]);
-
     return [[pairs componentsJoinedByString:@"&"] dataUsingEncoding:NSUTF8StringEncoding];
 }
 

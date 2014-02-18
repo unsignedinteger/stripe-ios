@@ -10,7 +10,8 @@
 #import "StripeError.h"
 #import "STPCardTest.h"
 
-@implementation NSDate(CardTestOverrides)
+@implementation NSDate (CardTestOverrides)
+
 + (NSDate *)date
 {
     // All card tests will pretend the current date is August 29, 1997.
@@ -21,15 +22,10 @@
     [components setDay:29];
     return [calendar dateFromComponents:components];
 }
+
 @end
 
-@interface STPCardTest ()
-- (NSDateComponents *)getCurrentDateComponents;
-- (NSInteger)getCurrentYear;
-@end
-
-@implementation STPCardTest
-{
+@implementation STPCardTest {
     STPCard *card;
 }
 
