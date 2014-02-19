@@ -58,17 +58,23 @@
 
 - (void)hasError:(NSError *)error
 {
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"There was an error submitting your card details", @"Shown in an alert view")
                                                       message:[error localizedDescription]
                                                      delegate:nil
                                             cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
-                                            otherButtonTitles:nil];
-    [message show];
+                                            otherButtonTitles:nil] show];
 }
 
 - (void)hasToken:(STPToken *)token
 {
-    NSLog(@"Received token %@", token.tokenId);
+    NSLog(@"Hooray! Received a token from Stripe: %@", token.tokenId);
+
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"Shown in an alert view")
+                                message:@"The card details were submitted successfully.\n\nNext, send the tokem to your servers."
+                               delegate:nil
+                      cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                      otherButtonTitles:nil] show];
+    [self.navigationController popViewControllerAnimated:YES];
 
     // Use this to send the token to your server. (Or, reuse your own API)
     /*
