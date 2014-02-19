@@ -70,7 +70,7 @@
     NSLog(@"Hooray! Received a token from Stripe: %@", token.tokenId);
 
     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"Shown in an alert view")
-                                message:@"The card details were submitted successfully.\n\nNext, send the tokem to your servers."
+                                message:@"The card details were submitted successfully.\n\nNext, send the token to your servers."
                                delegate:nil
                       cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
                       otherButtonTitles:nil] show];
