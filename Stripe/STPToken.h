@@ -21,7 +21,8 @@
 @property (nonatomic, readonly) NSDate *created;
 @property (nonatomic, readonly) BOOL used;
 
-- (void)postToURL:(NSURL *)url withParams:(NSDictionary *)params completion:(void (^)(NSURLResponse *, NSData *, NSError *))handler;
+// Use this function to easily send the token to your server.
+- (void)postToURL:(NSURL *)url withParams:(NSDictionary *)params completion:(void (^)(NSURLResponse *, NSData *, NSError *))completion;
 
 /*
  This method should not be invoked in your code.  This is used by Stripe to

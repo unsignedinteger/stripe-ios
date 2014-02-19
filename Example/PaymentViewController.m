@@ -69,25 +69,15 @@
 - (void)hasToken:(STPToken *)token
 {
     NSLog(@"Received token %@", token.tokenId);
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://example.com"]];
-    request.HTTPMethod = @"POST";
-    NSString *body     = [NSString stringWithFormat:@"stripeToken=%@", token.tokenId];
-    request.HTTPBody   = [body dataUsingEncoding:NSUTF8StringEncoding];
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               [MBProgressHUD hideHUDForView:self.view animated:YES];
-                               
-//                               if (error) {
-//                                   [self hasError:error];
-//                               } else {
-                                   [self.navigationController popViewControllerAnimated:YES];
-//                               }
-                           }];
+
+    // Use this to send the token to your server. (Or, reuse your own API)
+    /*
+    [token postToURL:[NSURL URLWithString:@"https://example.com"]
+          withParams:@{ @"token": token.tokenId } // (Could also include user ID, etc).
+          completion:^(NSURLResponse *response, NSData *data, NSError *error) {
+
+          }];
+    */
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "STPToken.h"
 #import "STPCard.h"
+#import "StripeUtil.h"
 
 @implementation STPToken
 
@@ -24,20 +25,15 @@
     return self;
 }
 
-- (void)postToURL:(NSURL *)url withParams:(NSDictionary *)params completion:(void (^)(NSURLResponse *, NSData *, NSError *))handler
+- (void)postToURL:(NSURL *)url withParams:(NSDictionary *)params completion:(void (^)(NSURLResponse *, NSData *, NSError *))completion
 {
-    NSMutableString *body = [NSMutableString stringWithFormat:@"stripeToken=%@", self.tokenId];
-    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [body appendFormat:@"&%@=%@", key, obj];
-    }];
-
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.HTTPMethod = @"POST";
-    request.HTTPBody = [body dataUsingEncoding:NSUTF8StringEncoding];
+    request.HTTPBody = [StripeUtil formBodyFromDictionary:params];
 
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
-                           completionHandler:handler];
+                           completionHandler:completion];
 }
 
 @end
