@@ -10,9 +10,9 @@
 #import "ViewController.h"
 #import "Stripe.h"
 #import "Constants.h"
-#import "Stripe+ApplePay.h"
 #import "PaymentViewController.h"
 #import "ShippingManager.h"
+#import "Stripe+ApplePay.h"
 
 #if DEBUG
 #import "STPTestPaymentAuthorizationViewController.h"
@@ -46,20 +46,23 @@
 
 - (IBAction)beginPayment:(id)sender {
     NSString *merchantId = @"<#Replace me with your Apple Merchant ID #>";
-
     PKPaymentRequest *paymentRequest = [Stripe paymentRequestWithMerchantIdentifier:merchantId];
-    if ([Stripe canSubmitPaymentRequest:paymentRequest]) {
+    if ([self canUseApplePayWithRequest:paymentRequest]) {
         [paymentRequest setRequiredShippingAddressFields:PKAddressFieldPostalAddress];
         [paymentRequest setRequiredBillingAddressFields:PKAddressFieldPostalAddress];
         paymentRequest.shippingMethods = [self.shippingManager defaultShippingMethods];
         paymentRequest.paymentSummaryItems = [self summaryItemsForShippingMethod:paymentRequest.shippingMethods.firstObject];
-#if DEBUG
-        STPTestPaymentAuthorizationViewController *auth = [[STPTestPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
-#else
-        PKPaymentAuthorizationViewController *auth = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
-#endif
-        auth.delegate = self;
-        [self presentViewController:auth animated:YES completion:nil];
+        UIViewController *authVC;
+        if ([self isDebugBuild]) {
+            STPTestPaymentAuthorizationViewController *auth = [[STPTestPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
+            auth.delegate = self;
+            authVC = auth;
+        } else {
+            PKPaymentAuthorizationViewController *auth = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:paymentRequest];
+            auth.delegate = self;
+            authVC = auth;
+        }
+        [self presentViewController:authVC animated:YES completion:nil];
     } else {
         PaymentViewController *paymentViewController = [[PaymentViewController alloc] initWithNibName:nil bundle:nil];
         paymentViewController.amount = self.amount;
@@ -167,6 +170,17 @@
 
 - (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)canUseApplePayWithRequest:(id)request {
+    return [Stripe canSubmitPaymentRequest:request];
+}
+
+- (BOOL)isDebugBuild {
+#if DEBUG
+    return YES;
+#endif
+    return NO;
 }
 
 - (ShippingManager *)shippingManager {
